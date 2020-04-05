@@ -45,9 +45,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.clickButton}>CLICK ME</button>
         <Header ref='Header'></Header>
-        {this.props.count}
       </div>
     );
   }
