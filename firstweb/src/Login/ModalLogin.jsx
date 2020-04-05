@@ -22,6 +22,7 @@ export default class ModalLogin extends React.Component {
       createTime: new Date(),
     };
     fetch('localhost/WebRAPHP/app/controllers/login.php', {
+        mode: 'no-cors',
         method: 'post',
         headers: {'Content-Type':'application/json'},
         body: data
