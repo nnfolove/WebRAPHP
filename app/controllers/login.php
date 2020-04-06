@@ -25,21 +25,6 @@ class login
     {
 
         $data = json_decode(file_get_contents('php://input'),true);
-        if (!empty($data["userName"]) && !empty($data["passWord"])) {
-            $userName = $data["userName"];
-            $passWord = $data["passWord"];
-            $sql = "select * from user where userName = '$userName' and passWord = '$passWord'";
-            $query = $this->conn->query($sql);
-            if(mysqli_num_rows($query) == 0) {
-                $rep = '0';
-            }
-            else
-            {
-                $rep = '1';
-            }
-        }
-        else
-            $rep = '2';
 		$userName = $data["userName"];
 		$passWord = $data["passWord"];
 		$sql = "select * from user where userName = '$userName' and passWord = '$passWord'";
