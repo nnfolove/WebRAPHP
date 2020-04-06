@@ -18,13 +18,30 @@ class login
         $this->conn = mysqli_connect(self::host, self::username, self::password, self::db);
         if($this->conn)
             $array = array('1');
-        echo json_encode($array);
+        //echo json_encode($array);
     }
 
     public function login()
     {
-        $post = array($_REQUEST["userName"]);
-        echo json_encode($post);
+
+        $data = json_decode(file_get_contents('php://input'),true);
+        if (!empty($data["userName"]) && !empty($data["passWord"])) {
+            $userName = $data["userName"];
+            $passWord = $data["passWord"];
+            $sql = "select * from user where userName = '$userName' and passWord = '$passWord'";
+            $query = $this->conn->query($sql);
+            if(mysqli_num_rows($query) == 0) {
+                $rep = '0';
+            }
+            else
+            {
+                $rep = '1';
+            }
+        }
+        else
+            $rep = '2';
+
+        echo json_encode($rep);
     }
 }
 $new = new login();
