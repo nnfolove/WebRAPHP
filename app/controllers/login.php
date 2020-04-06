@@ -40,6 +40,20 @@ class login
         }
         else
             $rep = '2';
+		$userName = $data["userName"];
+		$passWord = $data["passWord"];
+		$sql = "select * from user where userName = '$userName' and passWord = '$passWord'";
+		$query = $this->conn->query($sql);
+		if(mysqli_num_rows($query) == 0) {
+			$rep->Code = '0';
+			$rep->Message = 'Sai tài khoản hoặc mật khẩu';
+		}
+		else
+		{
+			$rep->Code = '1';
+			$rep->Message = 'Sai tài khoản hoặc mật khẩu';
+		}
+
 
         echo json_encode($rep);
     }
