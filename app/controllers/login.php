@@ -1,6 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 class login 
 {
     const host     = 'localhost';
@@ -23,24 +21,28 @@ class login
 
     public function login()
     {
-
+		header('Content-Type: application/json');
         $data = json_decode(file_get_contents('php://input'),true);
 		$userName = $data["userName"];
 		$passWord = $data["passWord"];
 		$sql = "select * from user where userName = '$userName' and passWord = '$passWord'";
 		$query = $this->conn->query($sql);
 		if(mysqli_num_rows($query) == 0) {
-			$rep->Code = '0';
-			$rep->Message = 'Sai tài khoản hoặc mật khẩu';
+			$response = array(
+        'status' => false,
+        'message' => 'An error occured...'
+		);
 		}
 		else
 		{
-			$rep->Code = '1';
-			$rep->Message = 'Sai tài khoản hoặc mật khẩu';
+			$response = array(
+        'status' => false,
+        'message' => 'An error occured...'
+		);
 		}
 
 
-        echo json_encode($rep);
+        echo json_encode($response);
     }
 }
 $new = new login();
