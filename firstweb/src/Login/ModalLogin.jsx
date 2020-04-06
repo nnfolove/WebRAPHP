@@ -27,6 +27,18 @@ export default class ModalLogin extends React.Component {
         headers: {'Content-Type':'application/json'},
         body: data
        }).then().then()
+    var myHeaders = new Headers();
+    myHeaders.append("accept", "application/json");
+    myHeaders.append("Content-Type", "application/json");
+    fetch("http://localhost:80/WebRAPHP/app/controllers/login.php", {
+      mode: "no-cors",
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    })
+      .then()
+      .then();
   };
 
   handleCancel = (e) => {
