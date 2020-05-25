@@ -36,7 +36,7 @@ class login
 		else
 		{
 			$response = array(
-        'status' => false,
+        'status' => true,
         'message' => 'An error occured...'
 		);
 		}
